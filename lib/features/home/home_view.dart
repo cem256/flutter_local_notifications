@@ -37,12 +37,21 @@ class HomeView extends StatelessWidget {
               },
             ),
             CustomElevatedButton(
+              label: "Recurring Notification",
+              onPressed: () async {
+                if (await HomeViewModel().showRecurringNotification()) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(const SnackBar(content: Text("Reccurring Notification created successfully")));
+                }
+              },
+            ),
+            CustomElevatedButton(
               label: "Cancel Notifications",
               onPressed: () async {
                 if (await HomeViewModel().cancelAllNotifications()) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text("All notifications cancelled successfuly"),
+                      content: Text("All notifications cancelled successfully"),
                     ),
                   );
                 }

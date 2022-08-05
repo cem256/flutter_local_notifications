@@ -47,6 +47,25 @@ class HomeViewModel {
     }
   }
 
+  Future<bool> showRecurringNotification() async {
+    final localNotificationModel = LocalNotificationModel(
+      id: Random().nextInt(10000),
+      title: "Recurring  Notification",
+      body: "This is a test notification",
+      payload: "Payload",
+    );
+
+    try {
+      await _localNotificationService.showRecurringNotification(
+        localNotificationModel,
+      );
+      return true;
+    } catch (e) {
+      debugPrint("Error while creating recurring local notification $e");
+      return false;
+    }
+  }
+
   Future<bool> cancelAllNotifications() async {
     try {
       await _localNotificationService.cancelAllNotifications();

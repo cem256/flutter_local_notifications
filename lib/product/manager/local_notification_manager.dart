@@ -80,6 +80,19 @@ class LocalNotificationManager implements BaseLocalNotificationManager<LocalNoti
   }
 
   @override
+  Future<void> showRecurringNotification(LocalNotificationModel model) async {
+    await _localNotificationPlugin.periodicallyShow(
+      model.id,
+      model.title,
+      model.body,
+      RepeatInterval.everyMinute,
+      _notificationDetails(),
+      payload: model.payload,
+      androidAllowWhileIdle: true,
+    );
+  }
+
+  @override
   Future<void> cancelAllNotifications() async {
     await _localNotificationPlugin.cancelAll();
   }
